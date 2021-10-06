@@ -1,42 +1,50 @@
 //querySelector percorre na árvore do DOM
 //createElement manipula elementos na árvore do DOM
 
-const criarTarefa = (evento) => {
+//IIFE, ou Immediately Invoked Function Expression ou “Função de Invocação Imediata”.
 
-    evento.preventDefault()
-    const lista = document.querySelector('[data-list]')
-    const input = document.querySelector('[data-form-input]')
-    const valor = input.value
+(() => {
 
-    const tarefa = document.createElement('li')
-    tarefa.classList.add('task')
+    const criarTarefa = (evento) => {
 
-    const conteudo = `<p class="content">${valor}</p>`
+        evento.preventDefault()
+        const lista = document.querySelector('[data-list]')
+        const input = document.querySelector('[data-form-input]')
+        const valor = input.value
 
-    tarefa.innerHTML = conteudo
+        const tarefa = document.createElement('li')
+        tarefa.classList.add('task')
 
-    lista.appendChild(tarefa)
-    tarefa.appendChild(BotaoConclui())
-    input.value = ''
-}
+        const conteudo = `<p class="content">${valor}</p>`
 
-const novaTarefa = document.querySelector('[data-form-button]')
+        tarefa.innerHTML = conteudo
 
-novaTarefa.addEventListener('click', criarTarefa)
+        lista.appendChild(tarefa)
+        tarefa.appendChild(BotaoConclui())
+        input.value = ''
+    }
 
-const BotaoConclui = () => {
-    const botaoConclui = document.createElement('button')
+    const novaTarefa = document.querySelector('[data-form-button]')
 
-    botaoConclui.classList.add('check-button')
-    botaoConclui.innerText = 'concluir'
+    novaTarefa.addEventListener('click', criarTarefa)
 
-    botaoConclui.addEventListener('click', concluirTarefa)
+    const BotaoConclui = () => {
+        const botaoConclui = document.createElement('button')
 
-    return botaoConclui
-}
+        botaoConclui.classList.add('check-button')
+        botaoConclui.innerText = 'concluir'
 
-const concluirTarefa = (evento) => {
-    const botaoConclui = evento.target
-    const tarefaCompleta = botaoConclui.parentElement
-    tarefaCompleta.classList.toggle('done') //toggle devolve um booleano (v ou f)
-}
+        botaoConclui.addEventListener('click', concluirTarefa)
+
+        return botaoConclui
+    }
+
+    const concluirTarefa = (evento) => {
+
+        const botaoConclui = evento.target
+        const tarefaCompleta = botaoConclui.parentElement
+        tarefaCompleta.classList.toggle('done') //toggle devolve um booleano (v ou f)
+
+    }
+
+})()
