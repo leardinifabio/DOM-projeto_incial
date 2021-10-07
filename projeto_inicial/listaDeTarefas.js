@@ -47,4 +47,13 @@
 
     }
 
+    const BotaoDeleta = () => {
+        const botaoDeleta = documment.createElement('button')
+
+        botaoDeleta.classList.add('check-button')
+        botaoDeleta.innerText = 'deletar'
+
+        botaoDeleta.addEventListener('click', )
+    }
+
 })()
