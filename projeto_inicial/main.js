@@ -6,9 +6,10 @@
 import BotaoConclui from './componentes/concluiTarefas.js'
 import BotaoDeleta from './componentes/deletaTarefas.js'
 
-const criarTarefa = (evento) => {
+const handleNovoItem = (evento) => {
 
     evento.preventDefault()
+
     const lista = document.querySelector('[data-list]')
     const input = document.querySelector('[data-form-input]')
     const valor = input.value
@@ -16,21 +17,35 @@ const criarTarefa = (evento) => {
     const calendario = document.querySelector('[data-form-data]')
     const data = moment(calendario.value)
 
-    console.log(data.format('DD/MM/YYYY'))
+    const dataFormatada = (data.format('DD/MM/YYYY'))
+
+    const dados = {
+        valor,
+        dataFormatada
+    }
+
+    lista.appendChild(tarefa)
+    input.value = ''
+
+}
+
+
+const criarTarefa = () => {
 
     const tarefa = document.createElement('li')
     tarefa.classList.add('task')
 
-    const conteudo = `<p class="content">${valor}</p>`
+    const conteudo = `<p class="content">${dataFormatada} * ${valor}</p>`
 
     tarefa.innerHTML = conteudo
 
-    lista.appendChild(tarefa)
     tarefa.appendChild(BotaoConclui())
     tarefa.appendChild(BotaoDeleta())
-    input.value = ''
+
+    return tarefa
+
 }
 
 const novaTarefa = document.querySelector('[data-form-button]')
 
-novaTarefa.addEventListener('click', criarTarefa)
+novaTarefa.addEventListener('click', handleNovoItem)
